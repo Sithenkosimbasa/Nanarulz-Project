@@ -6,41 +6,42 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
-    // Add hover effects for service cards
+    // Hover effects for service cards
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.classList.add('hover');
-        });
-        card.addEventListener('mouseleave', function() {
-            this.classList.remove('hover');
-        });
+        card.addEventListener('mouseenter', () => card.classList.add('hover'));
+        card.addEventListener('mouseleave', () => card.classList.remove('hover'));
     });
 
-    // Initialize testimonials carousel if present
-    const testimonialsCarousel = document.querySelector('.testimonials-carousel');
-    if (testimonialsCarousel) {
-        let currentIndex = 0;
-        const testimonials = testimonialsCarousel.querySelectorAll('.testimonial');
-        const totalTestimonials = testimonials.length;
+    // Testimonials carousel
+    const carousel = document.querySelector('.testimonial-carousel');
+    if (carousel) {
+        let index = 0;
+        const testimonials = carousel.querySelectorAll('.testimonial');
+        const total = testimonials.length;
 
-        function showTestimonial(index) {
-            testimonials.forEach((testimonial, i) => {
-                testimonial.style.display = (i === index) ? 'block' : 'none';
-            });
+        function showTestimonial(i) {
+            testimonials.forEach((t, j) => t.style.display = (i === j) ? 'block' : 'none');
         }
 
-        showTestimonial(currentIndex);
-
+        showTestimonial(index);
         setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalTestimonials;
-            showTestimonial(currentIndex);
-        }, 5000); // Change testimonial every 5 seconds
+            index = (index + 1) % total;
+            showTestimonial(index);
+        }, 5000);
     }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('show'));
 });
+
+
+
