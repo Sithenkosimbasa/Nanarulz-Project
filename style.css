@@ -122,9 +122,12 @@ section {
 }
 
 .about-content img {
-    width: 100%;
-    max-width: 400px;
+    
+
     border-radius: 10px;
+    height: 250px;
+    width: 250px;
+    
 }
 
 .about-text {
